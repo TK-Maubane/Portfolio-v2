@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TK — Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1c1c1c;
+    --surface: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --text: #f0ede8;
+    --muted: #888;
+    --accent: #c8f56a;
+    --accent2: #6af5c8;
+    --accent3: #f5a56a;
+    --tag-bg: rgba(200,245,106,0.1);
+    --tag-color: #c8f56a;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: 800;
+    color: var(--accent);
+    cursor: pointer;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem; font-weight: 300;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* PAGES */
+  .page { display: none; padding-top: 80px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* HOME — HERO */
+  .hero {
+    padding: 5rem 2.5rem 3rem;
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem; font-weight: 300;
+    color: var(--accent); letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem; color: var(--muted);
+    max-width: 520px; line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.78rem; font-weight: 400;
+    letter-spacing: 0.06em;
+    padding: 0.7rem 1.4rem;
+    border-radius: 4px;
+    border: none; cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #0d0d0d;
+  }
+  .btn-primary:hover { background: #d4ff80; }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border-hover);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--muted); }
+
+  /* DIVIDER */
+  .divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 3rem 2.5rem;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex; align-items: baseline; gap: 1rem;
+    padding: 0 2.5rem 1.8rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .section-line {
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+  .section-count {
+    font-family: var(--font-mono);
+    font-size: 0.7rem; color: var(--muted);
+  }
+
+  /* PROJECT GRID */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5px;
+    border-top: 1.5px solid var(--border);
+    border-left: 1.5px solid var(--border);
+    margin: 0 2.5rem;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border-right: 1.5px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
+    padding: 1.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .project-card:hover { background: var(--bg3); }
+  .project-card:hover::after { transform: scaleX(1); }
+
+  .card-category {
+    font-family: var(--font-mono);
+    font-size: 0.68rem; font-weight: 300;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .card-category.data { color: var(--accent2); }
+  .card-category.scripting { color: var(--accent3); }
+  .card-category.fun { color: #f56ac8; }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem; font-weight: 700;
+    line-height: 1.2; margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .card-summary {
+    font-size: 0.88rem; color: var(--muted);
+    line-height: 1.65; margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  /* MOCK IMAGE */
+  .card-img {
+    width: 100%; aspect-ratio: 16/9;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.68rem; color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .card-img-inner {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--bg3) 0%, var(--bg2) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-img-icon {
+    font-size: 2.5rem; opacity: 0.3;
+  }
+  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem; font-weight: 300;
+    background: var(--tag-bg); color: var(--tag-color);
+    padding: 0.25rem 0.6rem; border-radius: 2px;
+    letter-spacing: 0.04em;
+  }
+  .tag.data { background: rgba(106,245,200,0.1); color: var(--accent2); }
+  .tag.scripting { background: rgba(245,165,106,0.1); color: var(--accent3); }
+  .tag.fun { background: rgba(245,106,200,0.1); color: #f56ac8; }
+  .card-arrow {
+    position: absolute; top: 1.8rem; right: 1.8rem;
+    font-size: 1rem; color: var(--border-hover);
+    transition: all 0.2s;
+  }
+  .project-card:hover .card-arrow { color: var(--accent); transform: translate(2px, -2px); }
+
+  /* DETAIL PAGE */
+  .detail-back {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 300;
+    color: var(--muted); cursor: pointer; padding: 0.5rem 2.5rem;
+    text-decoration: none; letter-spacing: 0.05em;
+    margin-top: 1rem; margin-bottom: 0;
+    transition: color 0.2s;
+  }
+  .detail-back:hover { color: var(--text); }
+
+  .detail-hero {
+    padding: 2.5rem 2.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-cat {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.8rem;
+  }
+  .detail-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -0.025em; margin-bottom: 1rem;
+  }
+  .detail-summary {
+    font-size: 1rem; color: var(--muted);
+    max-width: 600px; line-height: 1.8;
+    font-weight: 300; margin-bottom: 1.5rem;
+  }
+  .detail-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .detail-link {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    padding: 0.5rem 1rem; border-radius: 3px;
+    border: 1px solid var(--border-hover);
+    color: var(--text); text-decoration: none;
+    cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .detail-link:hover { border-color: var(--accent); color: var(--accent); }
+  .detail-link.primary {
+    background: var(--accent); color: #0d0d0d;
+    border-color: var(--accent);
+  }
+  .detail-link.primary:hover { background: #d4ff80; }
+
+  /* SCREENSHOTS */
+  .screenshots {
+    display: flex; gap: 1rem; overflow-x: auto;
+    padding: 2rem 2.5rem;
+    scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+  }
+  .screenshot {
+    min-width: 320px; aspect-ratio: 16/10;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.68rem;
+    color: var(--muted); letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+  .screenshot-icon { font-size: 2rem; opacity: 0.25; }
+
+  /* DETAIL SECTIONS */
+  .detail-body {
+    display: grid; grid-template-columns: 1fr 280px;
+    gap: 0; border-top: 1px solid var(--border);
+  }
+  @media (max-width: 700px) {
+    .detail-body { grid-template-columns: 1fr; }
+    .detail-sidebar { border-left: none !important; border-top: 1px solid var(--border); }
+  }
+
+  .detail-main { padding: 2.5rem 2.5rem; }
+
+  .detail-section { margin-bottom: 2.5rem; }
+  .detail-section-title {
+    font-family: var(--font-display);
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-section p {
+    font-size: 0.94rem; color: rgba(240,237,232,0.8);
+    line-height: 1.8; font-weight: 300;
+  }
+  .detail-section ul {
+    list-style: none; padding: 0;
+  }
+  .detail-section ul li {
+    font-size: 0.9rem; color: rgba(240,237,232,0.75);
+    font-weight: 300; line-height: 1.75;
+    padding: 0.3rem 0;
+    padding-left: 1.2rem; position: relative;
+  }
+  .detail-section ul li::before {
+    content: '–'; position: absolute; left: 0; color: var(--accent);
+  }
+
+  .detail-sidebar {
+    padding: 2.5rem 1.8rem;
+    border-left: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .sidebar-block { margin-bottom: 2rem; }
+  .sidebar-label {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    font-weight: 300; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+  .tools-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tool-pill {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text); padding: 0.3rem 0.7rem; border-radius: 3px;
+    font-weight: 300;
+  }
+  .stat-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.82rem; padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--muted); font-weight: 300; }
+  .stat-value { font-family: var(--font-mono); font-size: 0.75rem; }
+
+  /* ABOUT PAGE */
+  .about-wrap {
+    max-width: 780px; margin: 0 auto;
+    padding: 4rem 2.5rem;
+  }
+  .about-eyebrow {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.2rem;
+  }
+  .about-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.03em; margin-bottom: 1.5rem;
+  }
+  .about-bio {
+    font-size: 1rem; line-height: 1.85;
+    color: rgba(240,237,232,0.8);
+    font-weight: 300; margin-bottom: 3rem;
+  }
+  .about-contacts {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.8rem; margin-bottom: 3rem;
+  }
+  .contact-item {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1rem 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: var(--border-hover); }
+  .contact-type {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.3rem;
+  }
+  .contact-val {
+    font-size: 0.9rem; color: var(--accent); font-weight: 400;
+  }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+  }
+  .skill-chip {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    font-weight: 300; text-align: center;
+    padding: 0.6rem; border-radius: 3px;
+    background: var(--bg2); border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* CATEGORY FILTER */
+  .filter-bar {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+    padding: 0 2.5rem 2rem;
+  }
+  .filter-btn {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    font-weight: 300; letter-spacing: 0.06em;
+    padding: 0.4rem 0.9rem; border-radius: 3px; cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .filter-btn.active {
+    background: var(--accent); color: #0d0d0d;
+    border-color: var(--accent);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--muted); font-weight: 300;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">TK<span style="color:var(--muted)">.</span></div>
+  <div class="nav-links">
+    <a onclick="showPage('home')">work</a>
+    <a onclick="showPage('about')">about</a>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-eyebrow">// I solve puzzles with code! </div>
+    <h1>Building things<br>that <span>matter.</span></h1>
+    <p class="hero-desc">
+      I'm TK — a developer based in South Africa. I build web apps, mobile experiences, data tools, and the occasional fun experiment. Here's some of the work I'm proud of.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn btn-primary" onclick="showPage('about')">A Bit Ka Nna</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('projects-anchor').scrollIntoView({behavior:'smooth'})">View projects ↓</button>
+    </div>
+  </div>
+
+  <hr class="divider" id="projects-anchor" />
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProjects('web', this)">Web dev</button>
+    <button class="filter-btn" onclick="filterProjects('data', this)">Data analytics</button>
+    <button class="filter-btn" onclick="filterProjects('scripting', this)">Scripting</button>
+    <button class="filter-btn" onclick="filterProjects('fun', this)">Fun</button>
+  </div>
+
+  <div class="section-header">
+    <span class="section-title">Projects</span>
+    <div class="section-line"></div>
+    <span class="section-count" id="project-count">4 projects</span>
+  </div>
+
+  <div class="projects-grid" id="projects-grid"></div>
+
+  <footer>
+    <span>TK — Software Developer</span>
+    <span>Johannesburg, South Africa</span>
+  </footer>
+</div>
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+  <div class="about-wrap">
+    <div class="about-eyebrow">// about me</div>
+    <div class="about-name">Hi, I'm TK.</div>
+    <div class="about-bio">
+      <p style="margin-bottom:1rem;">
+        I'm a software developer based in Johannesburg with a passion for building practical, well-crafted tools. I work across the full stack — from web and mobile apps to data pipelines and automation scripts.
+      </p>
+      <p style="margin-bottom:1rem;">
+        By day I work in tech; by night I'm usually deep in a side project. I care about clean code, thoughtful UX, and solving real problems. Recently I've been exploring Flutter for mobile, FastAPI for backends, and finding creative ways to make data useful.
+      </p>
+      <p>
+        I believe the best software is built with empathy — for the user, for the codebase, and for future-you at 2am debugging something you wrote six months ago.
+      </p>
+    </div>
+
+    <div class="section-header" style="padding:0 0 1.2rem;">
+      <span class="section-title">Get in touch</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-contacts">
+      <div class="contact-item">
+        <div class="contact-type">Email</div>
+        <div class="contact-val">your@email.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-type">GitHub</div>
+        <div class="contact-val">github.com/yourhandle</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-type">LinkedIn</div>
+        <div class="contact-val">linkedin.com/in/yourname</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-type">Location</div>
+        <div class="contact-val">Johannesburg, ZA</div>
+      </div>
+    </div>
+
+    <div class="section-header" style="padding:0 0 1.2rem; margin-top:2rem;">
+      <span class="section-title">Tools I use</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-chip">Flutter</div>
+      <div class="skill-chip">Dart</div>
+      <div class="skill-chip">Python</div>
+      <div class="skill-chip">FastAPI</div>
+      <div class="skill-chip">JavaScript</div>
+      <div class="skill-chip">SQL</div>
+      <div class="skill-chip">React</div>
+      <div class="skill-chip">Git</div>
+      <div class="skill-chip">Docker</div>
+      <div class="skill-chip">Linux</div>
+      <div class="skill-chip">Figma</div>
+      <div class="skill-chip">VS Code</div>
+    </div>
+  </div>
+  <footer>
+    <span>TK — Software Developer</span>
+    <span onclick="showPage('home')" style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;">← Back to work</span>
+  </footer>
+</div>
+
+<!-- DETAIL PAGE -->
+<div class="page" id="page-detail">
+  <div id="detail-content"></div>
+</div>
+
+<script>
+// ============================================================
+// PROJECTS DATA — edit this array to customise your portfolio
+// ============================================================
+const PROJECTS = [
+  {
+    id: 'babyboard',
+    // category: 'web' | 'data' | 'scripting' | 'fun'
+    category: 'web',
+    categoryLabel: 'Mobile App',
+    title: 'BabyBoard',
+    summary: "A Flutter mobile app for tracking your baby's daily milestones, feeding schedules, sleep patterns, and growth.",
+    // icon: any emoji used as placeholder until you add real screenshots
+    icon: '👶',
+    tags: ['Flutter', 'Dart', 'FastAPI', 'Python'],
+    reason: "Built as a solo project to explore Flutter and mobile development from the ground up. The idea came from wanting a clean, distraction-free way to log baby data without the bloated UX of existing apps.",
+    problems: [
+      'Setting up the Flutter/Android dev environment on Linux — resolving Java version conflicts, Gradle compatibility, and emulator configuration.',
+      'Designing a FastAPI backend that stays lightweight while handling authentication and real-time data syncing.',
+      'Learning Dart and Flutter\'s widget paradigm as a developer primarily familiar with Python and web tech.',
+    ],
+    learnings: [
+      "Flutter's widget tree makes UI composition remarkably composable once it clicks.",
+      'FastAPI\'s async capabilities pair very well with mobile backends needing snappy responses.',
+      'Developer experience matters — investing time in environment setup pays dividends throughout the build.',
+    ],
+    tools: ['Flutter', 'Dart', 'FastAPI', 'Python', 'SQLite', 'Android Studio', 'VS Code'],
+    status: 'In progress',
+    type: 'Side project',
+    // liveLink: URL string or null
+    liveLink: null,
+    // githubLink: URL string or null
+    githubLink: 'https://github.com/yourhandle/babyboard',
+    // screenshots: array of { src, caption } — leave empty to show placeholder boxes
+    screenshots: [],
+  },
+  {
+    id: 'wifi-qr',
+    category: 'scripting',
+    categoryLabel: 'Scripting',
+    title: 'WiFi QR Generator',
+    summary: 'A self-contained HTML tool that generates QR codes for home WiFi networks — no server, no dependencies, just open and use.',
+    icon: '📶',
+    tags: ['HTML', 'JavaScript', 'QR Code'],
+    reason: "Tired of having to find a phone, unlock it, and manually type in a WiFi password every time a guest visited. Built a single-file tool that lives on the home server and spits out a scannable QR code in seconds.",
+    problems: [
+      'Making it truly zero-dependency and self-contained — everything needed to run lives inside one HTML file.',
+      'Handling the WPA QR code format spec correctly so Android and iOS both parse it reliably.',
+    ],
+    learnings: [
+      'The WPA QR string format is surprisingly simple and well-supported across modern phones.',
+      'Self-contained HTML files are an underrated distribution format for small utility tools.',
+    ],
+    tools: ['HTML', 'CSS', 'JavaScript', 'QR Code Library'],
+    status: 'Shipped',
+    type: 'Home utility',
+    liveLink: null,
+    githubLink: null,
+    screenshots: [],
+  },
+  {
+    id: 'sales-dash',
+    category: 'data',
+    categoryLabel: 'Data Analytics',
+    title: 'Sales Dashboard',
+    summary: 'An interactive data dashboard that visualises sales trends, pipeline health, and team performance from raw CSV exports.',
+    icon: '📊',
+    tags: ['Python', 'Pandas', 'Plotly', 'SQL'],
+    reason: 'The business was drowning in spreadsheets. This dashboard made it possible to spot trends and outliers at a glance rather than spending hours in Excel.',
+    problems: [
+      'Inconsistent data formats across different CSV exports from various tools.',
+      'Building a pipeline that could refresh data without manual intervention.',
+      'Designing charts that are actually readable for non-technical stakeholders.',
+    ],
+    learnings: [
+      'Pandas is unbeatable for data wrangling once you internalize the groupby/merge/pivot patterns.',
+      'Plotly Express strikes a sweet spot between customisability and ease of use for dashboards.',
+    ],
+    tools: ['Python', 'Pandas', 'Plotly', 'SQL', 'SQLite'],
+    status: 'Shipped',
+    type: 'Work project',
+    liveLink: null,
+    githubLink: null,
+    screenshots: [],
+  },
+  {
+    id: 'game',
+    category: 'fun',
+    categoryLabel: 'Fun',
+    title: 'Something Fun',
+    summary: 'A weekend experiment — add yours here. Could be a game, a generative art piece, a CLI toy, or anything that made you smile while building it.',
+    icon: '🎮',
+    tags: ['Whatever', 'You', 'Want'],
+    reason: "Sometimes you build something just because it's fun. There's no business case, no user research, just genuine curiosity and an afternoon to burn.",
+    problems: [
+      'Scope creep — "just one more feature" is dangerously easy on personal projects.',
+    ],
+    learnings: [
+      'Play is how you discover your best ideas.',
+      'Constraints breed creativity — weekend projects force you to ship something.',
+    ],
+    tools: ['Your choice'],
+    status: 'For fun',
+    type: 'Side project',
+    liveLink: null,
+    githubLink: null,
+    screenshots: [],
+  },
+];
+// ============================================================
+// END OF DATA — no need to edit below this line
+// ============================================================
+
+function getCategoryClass(cat) {
+  if (cat === 'data') return 'data';
+  if (cat === 'scripting') return 'scripting';
+  if (cat === 'fun') return 'fun';
+  return '';
+}
+
+function renderCards(projects) {
+  const grid = document.getElementById('projects-grid');
+  grid.innerHTML = projects.map(p => {
+    const cc = getCategoryClass(p.category);
+    const imgContent = p.screenshots && p.screenshots.length > 0
+      ? `<img src="${p.screenshots[0].src}" alt="${p.screenshots[0].caption || p.title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />`
+      : `<div class="card-img-inner"><div class="card-img-icon">${p.icon}</div></div>`;
+    return `
+    <div class="project-card" onclick="showDetail('${p.id}')">
+      <span class="card-arrow">↗</span>
+      <div class="card-category ${cc}">${p.categoryLabel}</div>
+      <div class="card-img">${imgContent}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-summary">${p.summary}</div>
+      <div class="card-tags">
+        ${p.tags.map(t => `<span class="tag ${cc}">${t}</span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('project-count').textContent = `${projects.length} project${projects.length !== 1 ? 's' : ''}`;
+}
+
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = cat === 'all' ? PROJECTS : PROJECTS.filter(p => p.category === cat);
+  renderCards(filtered);
+}
+
+function showDetail(id) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  const cc = getCategoryClass(p.category);
+  const liveBtn = p.liveLink ? `<a class="detail-link primary" href="${p.liveLink}" target="_blank">Live app ↗</a>` : '';
+  const ghBtn = p.githubLink ? `<a class="detail-link" href="${p.githubLink}" target="_blank">GitHub →</a>` : '';
+  const links = (liveBtn || ghBtn) ? `<div class="detail-links">${liveBtn}${ghBtn}</div>` : '';
+
+  const screenshotHtml = (p.screenshots && p.screenshots.length > 0)
+    ? p.screenshots.map(s => `
+        <div class="screenshot" style="background:none;border:none;">
+          <img src="${s.src}" alt="${s.caption || p.title}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;border:1px solid var(--border);" />
+        </div>`).join('')
+    : `
+        <div class="screenshot">
+          <div class="screenshot-icon">${p.icon}</div>
+          <span>Screenshot / preview 1</span>
+        </div>
+        <div class="screenshot">
+          <div class="screenshot-icon">${p.icon}</div>
+          <span>Screenshot / preview 2</span>
+        </div>`;
+
+  document.getElementById('detail-content').innerHTML = `
+    <div class="detail-back" onclick="showPage('home')">← Back to all projects</div>
+    <div class="detail-hero">
+      <div class="detail-cat ${cc}">${p.categoryLabel}</div>
+      <div class="detail-title">${p.title}</div>
+      <div class="detail-summary">${p.summary}</div>
+      ${links}
+    </div>
+    <div class="screenshots">${screenshotHtml}</div>
+    <div class="detail-body">
+      <div class="detail-main">
+        <div class="detail-section">
+          <div class="detail-section-title">The reason</div>
+          <p>${p.reason}</p>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-title">Problems solved</div>
+          <ul>${p.problems.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div class="detail-section">
+          <div class="detail-section-title">What I learnt</div>
+          <ul>${p.learnings.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="detail-sidebar">
+        <div class="sidebar-block">
+          <div class="sidebar-label">Tools used</div>
+          <div class="tools-list">${p.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-label">Project info</div>
+          <div class="stat-row"><span class="stat-label">Status</span><span class="stat-value">${p.status}</span></div>
+          <div class="stat-row"><span class="stat-label">Type</span><span class="stat-value">${p.type}</span></div>
+          <div class="stat-row"><span class="stat-label">Category</span><span class="stat-value">${p.categoryLabel}</span></div>
+        </div>
+      </div>
+    </div>
+  `;
+  showPage('detail');
+  window.scrollTo(0, 0);
+}
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+renderCards(PROJECTS);
+</script>
+</body>
+</html>
