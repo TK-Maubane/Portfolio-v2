@@ -501,16 +501,18 @@
 <div class="page" id="page-about">
   <div class="about-wrap">
     <div class="about-eyebrow">// about me</div>
-    <div class="about-name">Hi, I'm TK.</div>
+    <div class="about-name">Hola, I'm TK.</div>
     <div class="about-bio">
       <p style="margin-bottom:1rem;">
-        I'm a software developer based in Johannesburg with a passion for building practical, well-crafted tools. I work across the full stack — from web and mobile apps to data pipelines and automation scripts.
+        I'm a software developer based in Johannesburg with a passion for building practical, well-crafted tools. 
+        I work across the full stack — from web and mobile apps to data pipelines and automation scripts.
       </p>
       <p style="margin-bottom:1rem;">
-        By day I work in tech; by night I'm usually deep in a side project. I care about clean code, thoughtful UX, and solving real problems. Recently I've been exploring Flutter for mobile, FastAPI for backends, and finding creative ways to make data useful.
+        By day I work in tech; by night I'm usually deep in a side project. 
+        I care about clean code, thoughtful UX, and solving real problems. 
       </p>
       <p>
-        I believe the best software is built with empathy — for the user, for the codebase, and for future-you at 2am debugging something you wrote six months ago.
+        I believe software to be a very powerful problem-solving tool! 
       </p>
     </div>
 
@@ -521,15 +523,18 @@
     <div class="about-contacts">
       <div class="contact-item">
         <div class="contact-type">Email</div>
-        <div class="contact-val">your@email.com</div>
+        <div class="contact-val"> --- </div>
       </div>
       <div class="contact-item">
         <div class="contact-type">GitHub</div>
-        <div class="contact-val">github.com/yourhandle</div>
+        <div class="contact-val"><a style="color: #d4ff80;" href=" https://github.com/TK-Maubane">Github</a>
+         </div>
       </div>
       <div class="contact-item">
         <div class="contact-type">LinkedIn</div>
-        <div class="contact-val">linkedin.com/in/yourname</div>
+        <div class="contact-val">
+          <a style="color: #d4ff80;" href="https://www.linkedin.com/in/tk-maubane-63478a150/">LinkedIn</a>
+         </div>
       </div>
       <div class="contact-item">
         <div class="contact-type">Location</div>
@@ -546,14 +551,14 @@
       <div class="skill-chip">Dart</div>
       <div class="skill-chip">Python</div>
       <div class="skill-chip">FastAPI</div>
+      <div class="skill-chip">Flask</div>
+      <div class="skill-chip">Django</div>
       <div class="skill-chip">JavaScript</div>
       <div class="skill-chip">SQL</div>
       <div class="skill-chip">React</div>
       <div class="skill-chip">Git</div>
       <div class="skill-chip">Docker</div>
       <div class="skill-chip">Linux</div>
-      <div class="skill-chip">Figma</div>
-      <div class="skill-chip">VS Code</div>
     </div>
   </div>
   <footer>
@@ -576,26 +581,29 @@ const PROJECTS = [
     id: 'babyboard',
     // category: 'web' | 'data' | 'scripting' | 'fun'
     category: 'web',
-    categoryLabel: 'Mobile App',
-    title: 'BabyBoard',
-    summary: "A Flutter mobile app for tracking your baby's daily milestones, feeding schedules, sleep patterns, and growth.",
+    categoryLabel: 'Web App',
+    title: 'Wedding Management System',
+    summary: "A mobile-friendly web app, designed to simplify wedding planning and general management",
     // icon: any emoji used as placeholder until you add real screenshots
     icon: '👶',
-    tags: ['Flutter', 'Dart', 'FastAPI', 'Python'],
-    reason: "Built as a solo project to explore Flutter and mobile development from the ground up. The idea came from wanting a clean, distraction-free way to log baby data without the bloated UX of existing apps.",
+    tags: ['Javascript', 'Django', 'Python', 'Postgres'],
+    reason: " Designed and built a full-stack wedding planning platform to centralise every aspect ofthe event — from guest management to vendor tracking — driven by a genuine problem worth solving.",
     problems: [
-      'Setting up the Flutter/Android dev environment on Linux — resolving Java version conflicts, Gradle compatibility, and emulator configuration.',
-      'Designing a FastAPI backend that stays lightweight while handling authentication and real-time data syncing.',
-      'Learning Dart and Flutter\'s widget paradigm as a developer primarily familiar with Python and web tech.',
+      "Implemented a smart guest list with capacity-aware RSVP tracking: guests marked as '+1 eligible' fed into live availability calculations, ensuring the venue limit was never breached.",
+      "Built a vendor management module tracking contact details, outstanding balances, and delivery status for every supplier — keeping finances and logistics in one place.",
+      "Developed an interactive seating guide on the front-end: guests could enter their name and instantly see a visual map of their seat in the venue.",
+      "Implemented role-based authorisation so family members could be assigned tasks and granted tiered access "
     ],
     learnings: [
-      "Flutter's widget tree makes UI composition remarkably composable once it clicks.",
-      'FastAPI\'s async capabilities pair very well with mobile backends needing snappy responses.',
+      "Vanilla javascript is very underrated. Simplicity goes a long way.",
+      "The end user cares almost entirely about the aesthetics and ease of use. React vs Angular vs Next.js is like debating over the best knife to butter bread with. Who cares?? Is the bread buttered?",
+      "All the guardrails in the world can't replace real user-feedback.",
       'Developer experience matters — investing time in environment setup pays dividends throughout the build.',
+      "Not knowing how/where to host an app can be costly learning curve..."
     ],
-    tools: ['Flutter', 'Dart', 'FastAPI', 'Python', 'SQLite', 'Android Studio', 'VS Code'],
-    status: 'In progress',
-    type: 'Side project',
+    tools: ['Python', 'Django', 'Javascript', 'Postgres', 'Heroku'],
+    status: 'Deployed',
+    type: 'Personal Project',
     // liveLink: URL string or null
     liveLink: null,
     // githubLink: URL string or null
@@ -603,6 +611,7 @@ const PROJECTS = [
     // screenshots: array of { src, caption } — leave empty to show placeholder boxes
     screenshots: [],
   },
+
   {
     id: 'wifi-qr',
     category: 'scripting',
@@ -621,33 +630,36 @@ const PROJECTS = [
       'Self-contained HTML files are an underrated distribution format for small utility tools.',
     ],
     tools: ['HTML', 'CSS', 'JavaScript', 'QR Code Library'],
-    status: 'Shipped',
+    status: 'Deployed',
     type: 'Home utility',
     liveLink: null,
     githubLink: null,
     screenshots: [],
   },
+
   {
-    id: 'sales-dash',
+    id: 'Forever Birthday App',
     category: 'data',
-    categoryLabel: 'Data Analytics',
-    title: 'Sales Dashboard',
-    summary: 'An interactive data dashboard that visualises sales trends, pipeline health, and team performance from raw CSV exports.',
+    categoryLabel: 'Data Collection & Visualization',
+    title: 'Forever Birthday App',
+    summary: 'An interactive app for the display and perusal of birthday wishes...',
     icon: '📊',
-    tags: ['Python', 'Pandas', 'Plotly', 'SQL'],
-    reason: 'The business was drowning in spreadsheets. This dashboard made it possible to spot trends and outliers at a glance rather than spending hours in Excel.',
+    tags: ['Python', 'Streamlit', 'Javascript', 'Google forms'],
+    reason: 'Birthday gift for my mom. Needed a rapid way to collect, transform and display birthday messages from anyone around the world who wished to wish my mom a happy birthday',
     problems: [
-      'Inconsistent data formats across different CSV exports from various tools.',
+      'Keep things simple. Keep instructions explicit',
       'Building a pipeline that could refresh data without manual intervention.',
       'Designing charts that are actually readable for non-technical stakeholders.',
     ],
     learnings: [
-      'Pandas is unbeatable for data wrangling once you internalize the groupby/merge/pivot patterns.',
-      'Plotly Express strikes a sweet spot between customisability and ease of use for dashboards.',
+      'Streamlit makes deploying data-driven apps a breeze',
+      'Streamlit allows for raw html injection. Which means javascript injection. Which means a world of possibilities for the UI, even though its a python based app',
+      'Focus first on function, then aesthetics',
+      'Procrastination sucks'
     ],
-    tools: ['Python', 'Pandas', 'Plotly', 'SQL', 'SQLite'],
-    status: 'Shipped',
-    type: 'Work project',
+    tools: ['Python', 'Streamlit', 'Javascript', 'SQLite'],
+    status: 'Deployed',
+    type: 'Person Project',
     liveLink: null,
     githubLink: null,
     screenshots: [],
@@ -655,11 +667,13 @@ const PROJECTS = [
   {
     id: 'game',
     category: 'fun',
-    categoryLabel: 'Fun',
-    title: 'Something Fun',
-    summary: 'A weekend experiment — add yours here. Could be a game, a generative art piece, a CLI toy, or anything that made you smile while building it.',
+    categoryLabel: 'Fun | Play',
+    title: "Smile'a Nyana (Smile a bit)",
+    summary: "Covid was morose time. All media reported almost exclusively sad news. \
+    This script was built to periodically send me a funny image retrived from Instagram, and attach a funny joke from a public API, and send all that to me via whatsapp. \
+    All that for a dose of joy amongst all the devastation.",
     icon: '🎮',
-    tags: ['Whatever', 'You', 'Want'],
+    tags: ['Scripting', 'Python', 'API'],
     reason: "Sometimes you build something just because it's fun. There's no business case, no user research, just genuine curiosity and an afternoon to burn.",
     problems: [
       'Scope creep — "just one more feature" is dangerously easy on personal projects.',
@@ -668,9 +682,9 @@ const PROJECTS = [
       'Play is how you discover your best ideas.',
       'Constraints breed creativity — weekend projects force you to ship something.',
     ],
-    tools: ['Your choice'],
-    status: 'For fun',
-    type: 'Side project',
+    tools: ['Twilio', 'Instagram API', 'Public chuck-norris API', 'cron jobs'],
+    status: 'Deployed',
+    type: 'Personal Project',
     liveLink: null,
     githubLink: null,
     screenshots: [],
