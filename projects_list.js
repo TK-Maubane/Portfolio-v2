@@ -91,6 +91,36 @@ const PROJECTS = [
     ],
   },
 
+
+  {
+    id: 'Gym Jams',
+    category: 'data',
+    categoryLabel: 'Fun | Play| Data',
+    title: "Gym Jams",
+    summary: "Investion of gym patterns and how my music tastes while working out may correlate",
+    icon: '🎧 vs 🏋',
+    tags: ['Data Analysis', 'Data Visualization', 'Python', 'Streamlit', 'CSS', 'Claude (AI)'],
+    reason: "I noticed that there are songs in my Spotify playlist that no longer play (disallowed). I wanted to find out how much of the music in my library I can stil actually listen too. I requested my data from Spotify and Virgin Active, merged it, and built a dashboard to easily check out wagwaan...! Dope use of free will!",
+    problems: [
+      'Data sanitazation. There was a ton of data cleaning before any of it was of any use.',
+    ],
+    learnings: [
+      'There is an art to visualzation',
+      'I workout like a madman',
+      'Data acquisition can be a timely process'
+    ],
+    tools: ['Jupyter Notebook', 'Python', 'plotly', 'matplotlib', 'Streamlit'],
+    status: 'Deployed',
+    type: 'Personal Project',
+    liveLink: 'https://gymjamsv4-dbnfgscwaajx2g7k7jiuln.streamlit.app/',
+    githubLink: null,
+    screenshots: [
+        { src: 'assets/gymjams/gympic_01.png'},
+        { src: 'assets/gymjams/gympic_02.png'},
+        { src: 'assets/gymjams/gympic_03.png'},
+    ],
+  },
+
   {
     id: 'Alcohol/Income/Suicide EDA & Feature engineering',
     category: 'data',
