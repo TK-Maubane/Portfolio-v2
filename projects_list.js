@@ -91,6 +91,34 @@ const PROJECTS = [
     ],
   },
 
+   {
+    id: 'Where Is Picasso?',
+    category: 'web',
+    categoryLabel: 'Web app',
+    title: 'Where Is Picasso?',
+    summary: 'React based app to help find my dog',
+    icon: '🐶',
+    tags: ['HTML', 'JavaScript', 'React', 'Vercel'],
+    reason: "A Next.js app to help retrieve my dog should he go missing. As well as provide general information about him to whoever should find the little guy",
+    problems: [
+      'Determining what information about him is safe to share publicly',
+      'The whole point is to have a QR code on his tag, that people can scan and find out his info and how to contact me. The issue here is strangers getting close enough to scan the code, without frightening Picasso into "self-defence mode" ',
+    ],
+    learnings: [
+      'React',
+      'Modularization',
+    ],
+    tools: ['HTML', 'CSS', 'Next.js'],
+    status: 'Deployed - on Vercel',
+    type: 'Personal utility',
+    liveLink: 'https://picasso-site-ruddy.vercel.app/',
+    githubLink: null,
+    screenshots: [{ src: 'assets/picasso/picasso_01.png'},
+                  { src: 'assets/picasso/picasso_02.png'},
+                  { src: 'assets/picasso/picasso_03.png'},
+                ],
+  },
+
 
   {
     id: 'Gym Jams',
@@ -202,29 +230,6 @@ const PROJECTS = [
     screenshots: [],
   },
 
-   {
-    id: 'wifi-qr',
-    category: 'scripting',
-    categoryLabel: 'Scripting',
-    title: 'WiFi QR Generator',
-    summary: 'A self-contained HTML tool that generates QR codes for home WiFi networks — no server, no dependencies, just open and use.',
-    icon: '💻',
-    tags: ['HTML', 'JavaScript', 'QR Code'],
-    reason: "Tired of having to find a phone, unlock it, and manually type in a WiFi password every time a guest visited. Built a single-file tool that lives on the home server and spits out a scannable QR code in seconds.",
-    problems: [
-      'Making it truly zero-dependency and self-contained — everything needed to run lives inside one HTML file.',
-      'Handling the WPA QR code format spec correctly so Android and iOS both parse it reliably.',
-    ],
-    learnings: [
-      'The WPA QR string format is surprisingly simple and well-supported across modern phones.',
-      'Self-contained HTML files are an underrated distribution format for small utility tools.',
-    ],
-    tools: ['HTML', 'CSS', 'JavaScript', 'QR Code Library'],
-    status: 'Deployed',
-    type: 'Home utility',
-    liveLink: null,
-    githubLink: null,
-    screenshots: [],
-  },
+  
 ]
 
